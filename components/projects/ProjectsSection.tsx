@@ -4,76 +4,20 @@ import Link from "next/link";
 import { BlurFade, MagicCard } from "@/components/ui/magic-ui";
 import { ExternalLink, Github } from "lucide-react";
 import Tilt from "react-parallax-tilt";
+import projectsData from "@/data/projects.json";
 
-const projects = [
-    {
-        title: "Fetch",
-        description: `a full‑stack smart lost‑and‑found system for school communities with
-            a modern interface, secure row‑level security, automated item matching, 
-            claim workflows, and real‑time notifications.`,
-        tags: ["React", "Next.js", "Tailwind CSS", "Node.js", "Express.js"],
-        live: "http://pup-fetch.vercel.app/",
-        github: "https://github.com/Roundyy/fetch",
-        thumbnail: "/project_thumbnails/Fetch_thumbnail.png",
-        type: "Web App",
-    },
-    {
-        title: "StallMate",
-        description:
-            `A full‑stack smart POS and inventory management system for PUP Lagoon stalls, with  
-            AI‑driven insights and interactive dashboards to streamline operations and decision‑making.`,
-        tags: ["Next.js", "Firebase", "Tailwind CSS"],
-        live: "https://stall-mate-2025.vercel.app/",
-        github: "https://github.com/Roundyy/stallmate",
-        thumbnail: "/project_thumbnails/Stallmate_thumbnail.png",
-        type: "Web App",
-    },
-    {
-        title: "I-70 Clinic App",
-        description:
-            `A digital system for government-funded clinics that manages employee medical registrations, 
-            replacing manual I-70 forms with a normalized relational database to ensure data integrity and streamline patient information management for faster healthcare delivery.`,
-        tags: ["Java", "MySQL"],
-        live: "#",
-        github: "https://github.com/BryanButtowski/I70-CLINIC-APP",
-        thumbnail: "/project_thumbnails/I70Clinic_thumbnail.png",
-        type: "Java App",
-    },
+type Project = {
+    title: string;
+    description: string;
+    tags: string[];
+    live: string;
+    github: string;
+    thumbnail: string;
+    type: string;
+    year: string;
+};
 
-    {
-        title: "Tsyek: Barangay Management System ",
-        description:
-            "A digital solution tailored to the operational needs of barangay offices. It offers a straightforward way for barangay staff to handle inventory records, making routine tasks simpler and faster. ",
-        tags: ["Java"],
-        live: "#",
-        github: "https://github.com/drchl/Tsyek-Barangay-Inventory-Management-System",
-        thumbnail: "/project_thumbnails/Tsyek_thumbnail.png",
-        type: "Java App",
-    },
-
-    {
-        title: "MyndSave",
-        description:
-            `A comprehensive budgeting tool designed to help the user manage finances effortlessly. With 
-            features that allow users to add income, track expenses, set budget goals, and view detailed 
-            spending breakdowns by category.`,
-        tags: ["Node.js", "Express", "PostgreSQL"],
-        live: "#",
-        github: "#",
-        thumbnail: "https://placehold.co/600x340/252B45/E8A87C?text=MyndSave",
-        type: "Web App",
-    },
-    {
-        title: "PAG-IBIG System Database ",
-        description:
-            "A database system designed around the PAG-IBIG membership form to improve data organization and efficiency by eliminating redundancy and ensuring data integrity.",
-        tags: ["Next.js", "Chart.js", "Python"],
-        live: "#",
-        github: "#",
-        thumbnail: "https://placehold.co/600x340/252B45/6B7BAD?text=PAG-IBIG",
-        type: "Backend / API",
-    }
-];
+const projects: Project[] = projectsData;
 
 const typeColor: Record<string, string> = {
     "Web App": "bg-[#6B7BAD]/20 text-[#9BADD0]",
@@ -90,13 +34,13 @@ export default function ProjectsSection() {
                 <BlurFade delay={0.1}>
                     <div className="mb-16 text-center">
                         <span className="inline-block mb-3 text-xs font-semibold tracking-widest text-[#E8A87C] uppercase font-[var(--font-inter)]">
-                            Our Work
+                            My Work
                         </span>
                         <h2 className="font-[var(--font-space-grotesk)] text-4xl sm:text-5xl font-bold text-[#EEF0F7] mb-5">
                             Featured Projects
                         </h2>
                         <p className="max-w-xl mx-auto text-[#8A96B8] text-lg font-[var(--font-inter)]">
-                            From web platforms to mobile apps and backend APIs — solutions we&apos;ve built that solve real problems.
+                            From web platforms to backend APIs — solutions I&apos;ve built that solve real problems.
                         </p>
                     </div>
                 </BlurFade>
@@ -120,7 +64,7 @@ export default function ProjectsSection() {
                                     className="h-full border border-[#3D4F7C]/30 bg-[#252B45]/50 hover:border-[#6B7BAD]/40 transition-all duration-300 rounded-xl overflow-hidden"
                                     gradientColor="#E8A87C12"
                                 >
-                                    {/* Thumbnail with hover overlay + icon buttons */}
+                                    {/* Thumbnail with hover overlay */}
                                     <div className="relative overflow-hidden group/thumb" style={{ height: "160px" }}>
                                         <img
                                             src={project.thumbnail}
@@ -149,6 +93,10 @@ export default function ProjectsSection() {
                                                 <Github size={16} />
                                             </Link>
                                         </div>
+                                        {/* Year badge */}
+                                        <span className="absolute top-3 left-3 px-2 py-0.5 rounded text-[10px] font-semibold bg-[#1A1F35]/80 text-[#8A96B8] backdrop-blur-sm font-[var(--font-inter)]">
+                                            {project.year}
+                                        </span>
                                     </div>
 
                                     <div className="relative p-5 flex flex-col h-full">
@@ -159,7 +107,7 @@ export default function ProjectsSection() {
                                         />
                                         {/* Type badge + links row */}
                                         <div className="flex items-center justify-between mb-3">
-                                            <span className={`px-2 py-0.5 rounded text-[10px] font-semibold font-[var(--font-inter)] ${typeColor[project.type]}`}>
+                                            <span className={`px-2 py-0.5 rounded text-[10px] font-semibold font-[var(--font-inter)] ${typeColor[project.type] ?? "bg-[#3D4F7C]/40 text-[#8A96B8]"}`}>
                                                 {project.type}
                                             </span>
                                             <div className="flex items-center gap-2">
