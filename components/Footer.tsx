@@ -1,12 +1,16 @@
 const navLinks = [
     { label: "About", href: "#about" },
     { label: "Projects", href: "#projects" },
-    { label: "Team", href: "#team" },
+    { label: "Certifications", href: "#certifications" },
+    { label: "Speaking", href: "#speaking" },
     { label: "Contact", href: "#contact" },
-    { label: "Facebook Page", href: "https://www.facebook.com/arkivedsolutions/" },
 ];
 
-
+const socialLinks = [
+    { label: "LinkedIn", href: "https://www.linkedin.com/in/rhandie-sales/" },
+    { label: "GitHub", href: "https://github.com/r0undy" },
+    { label: "Facebook", href: "https://www.facebook.com/rhandie.sales.1" },
+];
 
 export default function Footer() {
     return (
@@ -16,12 +20,15 @@ export default function Footer() {
             <div className="max-w-[72em] mx-auto px-[1.5em] py-[4em] flex flex-col sm:flex-row items-start justify-between gap-[3em]">
 
                 {/* Left — Brand */}
-                <div className="flex flex-col gap-[1em] max-w-[18.75em]">
+                <div className="flex flex-col gap-[1em] max-w-[20em]">
                     <span className="font-[var(--font-space-grotesk)] font-bold text-[#EEF0F7] text-[1.25em] tracking-tight">
-                        Arkived Solutions
+                        rhandie<span className="text-[#E8A87C]">.</span>
                     </span>
                     <p className="text-[#8A96B8] text-[0.875em] leading-relaxed font-[var(--font-inter)]">
-                        A software solutions team from PUP — building<br /> web apps, mobile apps, and API-driven digital<br /> experiences.
+                        Full-stack cloud-native engineer building<br /> scalable web applications with React.js,<br /> TypeScript, & .NET
+                    </p>
+                    <p className="text-[#5A6485] text-[0.75em] font-[var(--font-inter)]">
+                        Beta MSA · StellarPH100 · Philippines
                     </p>
                     {/* Accent line */}
                     <div className="w-[2.5em] h-[0.125em] bg-[#E8A87C]/60 rounded-full" />
@@ -42,7 +49,7 @@ export default function Footer() {
                                     href={link.href}
                                     className="text-[0.875em] text-[#8A96B8] hover:text-[#EEF0F7] transition-colors duration-200 font-[var(--font-inter)] w-fit"
                                 >
-                                    {link.label !== "Facebook Page" ? link.label : null}
+                                    {link.label}
                                 </a>
                             ))}
                         </nav>
@@ -54,19 +61,23 @@ export default function Footer() {
                             Connect
                         </p>
                         <div className="flex flex-col gap-[0.75em]">
+                            {socialLinks.map((link) => (
+                                <a
+                                    key={link.label}
+                                    href={link.href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-[0.875em] text-[#8A96B8] hover:text-[#EEF0F7] transition-colors duration-200 font-[var(--font-inter)] w-fit"
+                                >
+                                    {link.label}
+                                </a>
+                            ))}
                             <a
-                                href={navLinks[4].href}
-                                target="_blank"
-                                rel="noopener noreferrer"
+                                href="mailto:salesrhandie@gmail.com"
                                 className="text-[0.875em] text-[#8A96B8] hover:text-[#EEF0F7] transition-colors duration-200 font-[var(--font-inter)] w-fit"
                             >
-                                {navLinks[4].label}
+                                Email
                             </a>
-                            <p className="text-[0.875em] text-[#8A96B8] font-[var(--font-inter)]">
-                                Polytechnic University
-                                <br />
-                                of the Philippines
-                            </p>
                         </div>
                     </div>
 
@@ -77,11 +88,11 @@ export default function Footer() {
             <div className="border-t border-[#3D4F7C]/20">
                 <div className="max-w-[72em] mx-auto px-[1.5em] py-[1.25em] flex justify-center">
                     <p className="text-[#3D4F7C] text-[0.75em] font-[var(--font-inter)]">
-                        © 2026 Arkived Solutions. All rights reserved.
+                        © 2026 rhandie. All rights reserved.
                     </p>
                 </div>
             </div>
 
-        </footer >
+        </footer>
     );
 }

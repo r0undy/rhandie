@@ -1,11 +1,50 @@
 "use client";
 
 import { BlurFade } from "@/components/ui/magic-ui";
-import { Facebook, MessageCircle, ExternalLink } from "lucide-react";
+import { Facebook, Linkedin, Github, Mail, ExternalLink, MessageCircle } from "lucide-react";
+
+const contactLinks = [
+    {
+        icon: Linkedin,
+        label: "LinkedIn",
+        handle: "rhandie-sales",
+        href: "https://www.linkedin.com/in/rhandie-sales/",
+        accentColor: "#0A66C2",
+        glowColor: "#0A66C2",
+        description: "Connect professionally",
+    },
+    {
+        icon: Github,
+        label: "GitHub",
+        handle: "Roundyy",
+        href: "https://github.com/Roundyy",
+        accentColor: "#EEF0F7",
+        glowColor: "#6B7BAD",
+        description: "Browse my repositories",
+    },
+    {
+        icon: Facebook,
+        label: "Facebook",
+        handle: "rhandie.sales.1",
+        href: "https://www.facebook.com/rhandie.sales.1",
+        accentColor: "#1877F2",
+        glowColor: "#1877F2",
+        description: "Say hi on Facebook",
+    },
+    {
+        icon: Mail,
+        label: "Email",
+        handle: "rhandiesalesjr@gmail.com",
+        href: "mailto:rhandiesalesjr@gmail.com",
+        accentColor: "#E8A87C",
+        glowColor: "#E8A87C",
+        description: "Drop me a message",
+    },
+];
 
 export default function ContactSection() {
     return (
-        <section id="contact" className="py-28 px-6 bg-[#141829]">
+        <section id="contact" className="py-28 px-6 bg-[#1A1F35]">
             <div className="max-w-3xl mx-auto text-center">
 
                 <BlurFade delay={0.1}>
@@ -18,39 +57,57 @@ export default function ContactSection() {
                             Connect
                         </span>
                     </h2>
-                    <p className="text-[#8A96B8] text-lg font-[var(--font-inter)] mb-10 max-w-lg mx-auto">
-                        Have a project in mind or just want to say hi? We&apos;d love to hear from you. Reach us on our Facebook page.
+                    <p className="text-[#8A96B8] text-lg font-[var(--font-inter)] mb-12 max-w-lg mx-auto">
+                        Open to full-time roles, freelance contracts, and collaboration opportunities.
+                        I&apos;d love to hear from you.
                     </p>
                 </BlurFade>
 
-                {/* Facebook card */}
-                <BlurFade delay={0.25}>
-                    <a
-                        href="https://www.facebook.com/profile.php?id=61564503124354"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="group relative flex items-center gap-5 rounded-2xl border border-[#3D4F7C]/40 bg-[#252B45]/50 p-7 text-left hover:border-[#1877F2]/50 hover:bg-[#252B45]/80 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-[#1877F2]/10 overflow-hidden"
-                    >
-                        {/* Hover shimmer */}
-                        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-r from-transparent via-[#1877F2]/5 to-transparent" />
+                {/* Contact cards */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {contactLinks.map((link, i) => (
+                        <BlurFade key={link.label} delay={0.2 + i * 0.07}>
+                            <a
+                                href={link.href}
+                                target={link.label !== "Email" ? "_blank" : undefined}
+                                rel="noopener noreferrer"
+                                className="group relative flex items-center gap-4 rounded-2xl border border-[#3D4F7C]/40 bg-[#252B45]/50 p-6 text-left hover:bg-[#252B45]/80 transition-all duration-300 hover:-translate-y-1 overflow-hidden"
+                                style={{
+                                    boxShadow: "0 0 0 0 transparent",
+                                }}
+                                onMouseEnter={(e) => {
+                                    e.currentTarget.style.boxShadow = `0 8px 30px -8px ${link.glowColor}22`;
+                                    e.currentTarget.style.borderColor = `${link.accentColor}44`;
+                                }}
+                                onMouseLeave={(e) => {
+                                    e.currentTarget.style.boxShadow = "0 0 0 0 transparent";
+                                    e.currentTarget.style.borderColor = "";
+                                }}
+                            >
+                                {/* Hover shimmer */}
+                                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-r from-transparent via-white/[0.02] to-transparent" />
 
-                        <div className="shrink-0 w-14 h-14 rounded-xl bg-[#1877F2] flex items-center justify-center shadow-lg shadow-[#1877F2]/30">
-                            <Facebook size={24} className="text-white" />
-                        </div>
+                                <div
+                                    className="shrink-0 w-12 h-12 rounded-xl flex items-center justify-center shadow-lg transition-transform duration-200 group-hover:scale-110"
+                                    style={{ backgroundColor: `${link.accentColor}22`, border: `1px solid ${link.accentColor}33` }}
+                                >
+                                    <link.icon size={22} style={{ color: link.accentColor }} />
+                                </div>
 
-                        <div className="flex-1 min-w-0">
-                            <div className="font-[var(--font-space-grotesk)] font-bold text-[#EEF0F7] text-lg mb-0.5 flex items-center gap-2">
-                                Arkived Solutions
-                                <ExternalLink size={14} className="text-[#8A96B8] group-hover:text-[#1877F2] transition-colors" />
-                            </div>
-                            <div className="text-[#8A96B8] text-sm font-[var(--font-inter)]">
-                                facebook.com/arkivedsolutions · Follow us for updates
-                            </div>
-                        </div>
+                                <div className="flex-1 min-w-0">
+                                    <div className="font-[var(--font-space-grotesk)] font-bold text-[#EEF0F7] text-sm mb-0.5 flex items-center gap-2">
+                                        {link.label}
+                                        <ExternalLink size={12} className="text-[#5A6485] group-hover:text-[#8A96B8] transition-colors" />
+                                    </div>
+                                    <div className="text-[#8A96B8] text-xs font-[var(--font-inter)] truncate">{link.handle}</div>
+                                    <div className="text-[#5A6485] text-[10px] font-[var(--font-inter)] mt-0.5">{link.description}</div>
+                                </div>
 
-                        <MessageCircle size={20} className="shrink-0 text-[#3D4F7C] group-hover:text-[#1877F2] transition-colors" />
-                    </a>
-                </BlurFade>
+                                <MessageCircle size={16} className="shrink-0 text-[#3D4F7C] group-hover:text-[#8A96B8] transition-colors" />
+                            </a>
+                        </BlurFade>
+                    ))}
+                </div>
             </div>
         </section>
     );

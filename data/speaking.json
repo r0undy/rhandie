@@ -1,0 +1,42 @@
+[
+  {
+    "title": "Building Cloud-Native Apps with Azure",
+    "event": "Microsoft Student Community PUP — Tech Talk",
+    "date": "2025",
+    "type": "Speaker",
+    "description": "Walked the audience through cloud-native patterns, serverless architecture, and deploying full-stack applications on Microsoft Azure.",
+    "location": "Polytechnic University of the Philippines, Manila",
+    "recordingUrl": "#",
+    "slidesUrl": "#"
+  },
+  {
+    "title": "Introduction to Full-Stack Web Development",
+    "event": "Google Developer Groups — DevFest Session",
+    "date": "2025",
+    "type": "Speaker",
+    "description": "A hands-on session introducing students to the full-stack ecosystem covering React, Node.js, and database design fundamentals.",
+    "location": "Manila, Philippines",
+    "recordingUrl": "#",
+    "slidesUrl": "#"
+  },
+  {
+    "title": "AWS Cloud Clubs — Orientation & Kickoff",
+    "event": "AWS Cloud Club PUP",
+    "date": "2024",
+    "type": "Facilitator",
+    "description": "Facilitated the AWS Cloud Club orientation for PUP students, covering cloud basics, the AWS ecosystem, and career pathways in cloud computing.",
+    "location": "Polytechnic University of the Philippines, Manila",
+    "recordingUrl": "#",
+    "slidesUrl": "#"
+  },
+  {
+    "title": "StellarPH100 — Next-Gen Tech Leaders Panel",
+    "event": "StellarPH 100 Under 30",
+    "date": "2024",
+    "type": "Panelist",
+    "description": "Participated as a panelist representing the next generation of Filipino tech leaders, sharing experiences in open-source contribution, student leadership, and software engineering.",
+    "location": "Philippines",
+    "recordingUrl": "#",
+    "slidesUrl": "#"
+  }
+]
