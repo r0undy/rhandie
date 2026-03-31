@@ -73,7 +73,7 @@ export default function ParallaxHero() {
                 style={{ zIndex: 6 }}
             />
 
-            {/* Floating atmospheric orbs — replaces meteors */}
+            {/* Floating atmospheric orbs */}
             <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 7 }}>
                 <motion.div
                     className="absolute w-[500px] h-[500px] rounded-full bg-[#E8A87C]/8 blur-[140px]"
@@ -96,30 +96,22 @@ export default function ParallaxHero() {
             </div>
 
             {/* Hero content */}
-            <div className="relative flex flex-col items-center text-center px-6 max-w-3xl" style={{ zIndex: 8 }}>
+            <div className="relative flex flex-col items-center text-center px-6 max-w-4xl" style={{ zIndex: 8 }}>
 
-                {/* Headline — static */}
+                {/* Headline */}
                 <motion.h1
                     initial={{ opacity: 0, y: 24 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.7, delay: 0.4 }}
                     className="font-[var(--font-space-grotesk)] font-bold text-5xl sm:text-6xl md:text-7xl text-white leading-tight mb-4 drop-shadow-md"
                 >
-                    We Build
+                    Hi, I&apos;m{" "}
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#E8A87C] to-[#d4956a]">
+                        Rhandie
+                    </span>
                     <br />
-                    <span className="text-[#E8A87C]">Software Solutions</span>
+                    Full-Stack Engineer
                 </motion.h1>
-
-                {/* Sub-headline */}
-                <motion.p
-                    initial={{ opacity: 0, y: 16 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.7, delay: 0.6 }}
-                    className="text-white/60 text-lg max-w-lg mb-10 leading-relaxed font-[var(--font-inter)]"
-                >
-                    A software solutions team from the Polytechnic University of the Philippines
-                    building modern digital experiences.
-                </motion.p>
 
                 {/* CTAs */}
                 <motion.div
@@ -132,33 +124,17 @@ export default function ParallaxHero() {
                         href="#projects"
                         className="rounded-full px-7 py-3 font-semibold text-sm text-[#1A1F35] bg-[#E8A87C] hover:bg-[#d9976d] transition-all duration-200 font-[var(--font-inter)] shadow-md hover:shadow-[#E8A87C]/30 hover:shadow-lg"
                     >
-                        View Our Work
+                        View My Work
                     </a>
                     <a
-                        href="#team"
+                        href="/resume/SALES_Rhandie_Resume.pdf"
+                        download
                         className="rounded-full px-7 py-3 font-semibold text-sm text-white border border-white/30 bg-white/5 hover:bg-white/10 backdrop-blur-sm transition-all duration-200 font-[var(--font-inter)]"
                     >
-                        Meet the Team
+                        Download Résumé
                     </a>
                 </motion.div>
             </div>
-
-            {/* Scroll indicator */}
-            <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1.4, duration: 0.8 }}
-                className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-white/40"
-                style={{ zIndex: 8 }}
-            >
-                <span className="text-[10px] tracking-widest uppercase font-[var(--font-inter)]">Scroll</span>
-                <motion.div
-                    animate={{ y: [0, 5, 0] }}
-                    transition={{ repeat: Infinity, duration: 1.6, ease: "easeInOut" }}
-                >
-                    <ChevronDown size={16} />
-                </motion.div>
-            </motion.div>
         </section>
     );
 }

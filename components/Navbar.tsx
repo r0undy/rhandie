@@ -7,8 +7,8 @@ import { Menu, X } from "lucide-react";
 const navLinks = [
     { label: "About", href: "#about" },
     { label: "Projects", href: "#projects" },
-    { label: "Team", href: "#team" },
-    { label: "Contact", href: "#contact" },
+    { label: "Certifications", href: "#certifications" },
+    { label: "Speaking", href: "#speaking" },
 ];
 
 // Smooth scroll helper that works with Lenis
@@ -46,7 +46,7 @@ export default function Navbar() {
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
             className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 ${scrolled || menuOpen
-                ? "backdrop-blur-md bg-[#1A1F35]/90 border-b border-[#3D4F7C]/40 [border-bottom-color:#3D4F7C66] shadow-lg shadow-black/20"
+                ? "backdrop-blur-md bg-[#1A1F35]/90 border-b border-[#3D4F7C]/40 shadow-lg shadow-black/20"
                 : "bg-transparent border-b border-transparent"
                 }`}
         >
@@ -58,7 +58,7 @@ export default function Navbar() {
                     whileHover={{ scale: 1.03 }}
                     className="font-[var(--font-space-grotesk)] font-semibold text-white text-xl tracking-tight"
                 >
-                    Arkived
+                    rhandie<span className="text-[#E8A87C]">.</span>
                 </motion.a>
 
                 {/* Desktop nav */}
@@ -79,11 +79,11 @@ export default function Navbar() {
                         whileTap={{ scale: 0.97 }}
                         className="px-4 py-2 rounded-lg bg-[#E8A87C] text-[#1A1F35] text-sm font-semibold font-[var(--font-inter)] transition-shadow hover:bg-[#d9976d] cursor-pointer"
                     >
-                        Get in Touch
+                        Contact
                     </motion.button>
                 </nav>
 
-                {/* Mobile hamburger — large touch target */}
+                {/* Mobile hamburger */}
                 <button
                     className="md:hidden flex items-center justify-center w-10 h-10 rounded-lg text-white hover:bg-white/10 transition-colors"
                     onClick={() => setMenuOpen((v) => !v)}
@@ -131,7 +131,7 @@ export default function Navbar() {
                                     onClick={() => handleNavClick("#contact")}
                                     className="w-full px-3 py-3 rounded-lg bg-[#E8A87C] text-[#1A1F35] text-sm font-semibold font-[var(--font-inter)] hover:bg-[#d9976d] transition-colors cursor-pointer"
                                 >
-                                    Get in Touch
+                                    Contact
                                 </button>
                             </li>
                         </ul>
