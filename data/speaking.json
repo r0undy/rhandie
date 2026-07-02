@@ -1,41 +1,97 @@
 [
   {
+    "slug": "cloud-native-azure",
     "title": "Building Cloud-Native Apps with Azure",
     "event": "Microsoft Student Community PUP — Tech Talk",
     "date": "2025",
     "type": "Speaker",
     "description": "Walked the audience through cloud-native patterns, serverless architecture, and deploying full-stack applications on Microsoft Azure.",
     "location": "Polytechnic University of the Philippines, Manila",
+    "audience": "University students and student developers",
+    "topics": ["Azure", "Cloud-Native", "Serverless", "Full-Stack Deployment"],
+    "highlights": [
+      "Live-deployed a full-stack app to Azure during the session",
+      "Covered practical serverless architecture patterns"
+    ],
+    "thumbnail": "/speaking/cloud-native-azure/thumbnail.png",
+    "gallery": [
+      "/speaking/cloud-native-azure/1.png",
+      "/speaking/cloud-native-azure/2.png",
+      "/speaking/cloud-native-azure/3.png",
+      "/speaking/cloud-native-azure/4.png"
+    ],
     "recordingUrl": "#",
     "slidesUrl": "#"
   },
   {
+    "slug": "fullstack-devfest",
     "title": "Introduction to Full-Stack Web Development",
     "event": "Google Developer Groups — DevFest Session",
     "date": "2025",
     "type": "Speaker",
     "description": "A hands-on session introducing students to the full-stack ecosystem covering React, Node.js, and database design fundamentals.",
     "location": "Manila, Philippines",
+    "audience": "Students and early-career developers",
+    "topics": ["React", "Node.js", "Database Design", "Web Fundamentals"],
+    "highlights": [
+      "Hands-on coding walkthrough from frontend to database",
+      "Practical career-entry advice for aspiring developers"
+    ],
+    "thumbnail": "/speaking/fullstack-devfest/thumbnail.png",
+    "gallery": [
+      "/speaking/fullstack-devfest/1.png",
+      "/speaking/fullstack-devfest/2.png",
+      "/speaking/fullstack-devfest/3.png",
+      "/speaking/fullstack-devfest/4.png"
+    ],
     "recordingUrl": "#",
     "slidesUrl": "#"
   },
   {
+    "slug": "aws-cloud-club-kickoff",
     "title": "AWS Cloud Clubs — Orientation & Kickoff",
     "event": "AWS Cloud Club PUP",
     "date": "2024",
     "type": "Facilitator",
     "description": "Facilitated the AWS Cloud Club orientation for PUP students, covering cloud basics, the AWS ecosystem, and career pathways in cloud computing.",
     "location": "Polytechnic University of the Philippines, Manila",
+    "audience": "Student cloud community members",
+    "topics": ["AWS", "Cloud Fundamentals", "Career Pathways"],
+    "highlights": [
+      "Onboarded the founding cohort of the AWS Cloud Club",
+      "Mapped cloud career pathways for students"
+    ],
+    "thumbnail": "/speaking/aws-cloud-club-kickoff/thumbnail.png",
+    "gallery": [
+      "/speaking/aws-cloud-club-kickoff/1.png",
+      "/speaking/aws-cloud-club-kickoff/2.png",
+      "/speaking/aws-cloud-club-kickoff/3.png",
+      "/speaking/aws-cloud-club-kickoff/4.png"
+    ],
     "recordingUrl": "#",
     "slidesUrl": "#"
   },
   {
+    "slug": "stellarph100-panel",
     "title": "StellarPH100 — Next-Gen Tech Leaders Panel",
     "event": "StellarPH 100 Under 30",
     "date": "2024",
     "type": "Panelist",
-    "description": "Participated as a panelist representing the next generation of Filipino tech leaders, sharing experiences in open-source contribution, student leadership, and software engineering.",
+    "description": "Panelist representing the next generation of Filipino tech leaders — sharing experiences in open-source contribution, student leadership, and software engineering.",
     "location": "Philippines",
+    "audience": "Tech professionals and student leaders",
+    "topics": ["Leadership", "Open Source", "Software Engineering"],
+    "highlights": [
+      "Recognized among StellarPH 100 Under 30",
+      "Shared open-source and student leadership journey"
+    ],
+    "thumbnail": "/speaking/stellarph100-panel/thumbnail.png",
+    "gallery": [
+      "/speaking/stellarph100-panel/1.png",
+      "/speaking/stellarph100-panel/2.png",
+      "/speaking/stellarph100-panel/3.png",
+      "/speaking/stellarph100-panel/4.png"
+    ],
     "recordingUrl": "#",
     "slidesUrl": "#"
   }

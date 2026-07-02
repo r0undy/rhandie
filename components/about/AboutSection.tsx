@@ -2,9 +2,9 @@
 
 import { motion } from "motion/react";
 import Image from "next/image";
-import { AnimatedListItem } from "@/components/ui/magic-ui";
-import { BorderBeam } from "@/components/ui/magic-ui";
-import { Download, Facebook, Linkedin, Github, MapPin, Briefcase } from "lucide-react";
+import { Reveal, EASE_WATER } from "@/components/ui/motion";
+import { RESUME_PATH } from "@/lib/site";
+import { Download, Facebook, Linkedin, Github, MapPin, Briefcase, Trophy, BadgeCheck, Users, GraduationCap } from "lucide-react";
 import {
     ReactIcon, NextjsIcon, TypescriptIcon,
     NodejsIcon, DotNetIcon, DjangoIcon,
@@ -15,8 +15,6 @@ import {
 const techStack = [
     {
         category: "Frontend",
-        color: "text-[#E8A87C]",
-        borderColor: "border-[#E8A87C]/20",
         items: [
             { icon: ReactIcon, label: "React.js / Vite" },
             { icon: NextjsIcon, label: "Next.js" },
@@ -25,8 +23,6 @@ const techStack = [
     },
     {
         category: "Backend",
-        color: "text-[#9BADD0]",
-        borderColor: "border-[#6B7BAD]/20",
         items: [
             { icon: DotNetIcon, label: ".NET" },
             { icon: DjangoIcon, label: "Django" },
@@ -35,8 +31,6 @@ const techStack = [
     },
     {
         category: "Database",
-        color: "text-[#7EC8A8]",
-        borderColor: "border-[#3D8C6B]/20",
         items: [
             { icon: MySQLIcon, label: "MySQL" },
             { icon: MongoDBIcon, label: "MongoDB" },
@@ -44,12 +38,11 @@ const techStack = [
         ],
     },
     {
-        category: "DevOps & Cloud",
-        color: "text-[#B89DE8]",
-        borderColor: "border-[#7B5BAD]/20",
+        category: "Cloud & AI",
         items: [
             { icon: GitIcon, label: "Git" },
             { icon: AzureIcon, label: "Azure" },
+            { icon: AzureIcon, label: "Azure AI Foundry" },
             { icon: AWSIcon, label: "AWS" },
             { icon: GCPIcon, label: "GCP" },
         ],
@@ -62,149 +55,184 @@ const socials = [
     { icon: Github, href: "https://github.com/Roundyy", label: "GitHub" },
 ];
 
+const highlights = [
+    { icon: Trophy, title: "Multi-Hackathon Winner", detail: "Champion placements across AI & cloud hackathons" },
+    { icon: BadgeCheck, title: "Microsoft Credentials", detail: "Certified & Applied Skills across Azure and AI" },
+    { icon: Users, title: "Mentor & Student Leader", detail: "Leading developer communities across the PH" },
+    { icon: GraduationCap, title: "StellarPH100", detail: "The country’s greatest minds under 30" },
+];
+
+const communities = [
+    "Associate Microsoft Student Ambassador",
+    "Microsoft Student Community",
+    "Google Developer Groups",
+    "AWS Cloud Clubs",
+    "Seekers Guild",
+];
+
 export default function AboutSection() {
     return (
-        <motion.section
-            id="about"
-            className="py-28 px-6 bg-[#1A1F35]"
-            initial={{ clipPath: "inset(8% 0 0 0 round 16px)", opacity: 0.4 }}
-            whileInView={{ clipPath: "inset(0% 0 0 0 round 0px)", opacity: 1 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-        >
+        <section id="about" className="caustic-light relative py-28 px-6 bg-[var(--ocean-deep)]">
             <div className="max-w-6xl mx-auto">
 
                 {/* Section header */}
-                <motion.div
-                    className="mb-16 text-center"
-                    initial={{ opacity: 0, y: 24 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-40px" }}
-                    transition={{ duration: 0.6, delay: 0.15 }}
-                >
-                    <span className="inline-block mb-3 text-xs font-semibold tracking-widest text-[#E8A87C] uppercase font-[var(--font-inter)]">
+                <Reveal className="mb-16 text-center">
+                    <span className="inline-block mb-3 text-xs font-semibold tracking-[0.2em] text-[var(--glow-amber)] uppercase font-[var(--font-inter)]">
                         About Me
                     </span>
-                    <h2 className="font-[var(--font-space-grotesk)] text-4xl sm:text-5xl font-bold text-[#EEF0F7] mb-5">
-                        The <span className="text-[#E8A87C]">Engineer</span> Behind the Code
+                    <h2 className="font-[var(--font-space-grotesk)] text-4xl sm:text-5xl font-bold text-[var(--mist-100)] mb-5">
+                        The <span className="text-[var(--glow-amber)]">Engineer</span> Behind the Code
                     </h2>
-                    <p className="max-w-2xl mx-auto text-[#8A96B8] text-lg leading-relaxed font-[var(--font-inter)]">
-                        A full-stack cloud-native developer passionate about writing clean, maintainable code
-                        and building scalable applications from idea to production.
+                    <p className="max-w-2xl mx-auto text-[var(--mist-500)] text-lg leading-relaxed font-[var(--font-inter)]">
+                        IT student, Co-Founder & Engineer at Axon Enjin, and multi-hackathon winner —
+                        building AI-powered products from idea to production.
                     </p>
-                </motion.div>
+                </Reveal>
 
                 {/* Profile card + Tech Stack */}
-                <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
+                <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 items-stretch">
 
-                    {/* Profile Card — full image */}
-                    <motion.div
-                        className="lg:col-span-2"
-                        initial={{ opacity: 0, x: -30 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true, margin: "-40px" }}
-                        transition={{ duration: 0.6, delay: 0.2 }}
-                    >
-                        <div className="relative rounded-2xl border border-[#3D4F7C]/40 bg-[#252B45]/50 overflow-hidden group">
-                            <BorderBeam duration={10} colorFrom="#E8A87C" colorTo="#6B7BAD" borderWidth={1.5} />
+                    {/* Profile Card — fills the full column height to bento with the right side */}
+                    <div className="lg:col-span-2">
+                        <Reveal className="h-full">
+                            <div className="group relative h-full flex flex-col rounded-2xl border border-[var(--ocean-border)] bg-[var(--ocean-surface)]/50 overflow-hidden">
+                                    {/* Photo — fills remaining height, only name + role overlaid */}
+                                    <div className="relative w-full overflow-hidden aspect-[4/5] lg:aspect-auto lg:flex-1 lg:min-h-[420px]">
+                                        <Image
+                                            src="/team/rhandie.png"
+                                            alt="Rhandie J. Sales Jr."
+                                            fill
+                                            sizes="(max-width: 1024px) 100vw, 40vw"
+                                            className="object-cover object-top transition-transform duration-700 group-hover:scale-[1.04]"
+                                        />
+                                        <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-[var(--ocean-abyss)]/90 via-[var(--ocean-abyss)]/40 to-transparent" />
+                                        <div className="absolute bottom-0 inset-x-0 p-5">
+                                            <h3 className="font-[var(--font-space-grotesk)] font-bold text-[var(--mist-100)] text-xl mb-0.5">
+                                                Rhandie J. Sales Jr.
+                                            </h3>
+                                            <p className="text-[var(--glow-amber)] text-sm font-semibold font-[var(--font-inter)]">
+                                                Co-Founder & Engineer @ Axon Enjin
+                                            </p>
+                                        </div>
+                                    </div>
 
-                            {/* Full image */}
-                            <div className="relative w-full aspect-[3/4] overflow-hidden">
-                                <Image
-                                    src="/team/rhandie.png"
-                                    alt="Rhandie J. Sales Jr."
-                                    fill
-                                    className="object-cover object-top group-hover:scale-105 transition-transform duration-700"
-                                    unoptimized
-                                />
-                                {/* Gradient overlay at bottom */}
-                                <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#252B45] via-[#252B45]/60 to-transparent" />
+                                    {/* Info panel below the photo */}
+                                    <div className="shrink-0 border-t border-[var(--ocean-border)] p-5">
+                                        <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 mb-4">
+                                            <div className="flex items-center gap-1.5 text-[var(--mist-500)] text-xs font-[var(--font-inter)]">
+                                                <MapPin size={12} className="text-[var(--glow-amber)]" />
+                                                <span>Philippines</span>
+                                            </div>
+                                            <div className="flex items-center gap-1.5 text-[var(--mist-500)] text-xs font-[var(--font-inter)]">
+                                                <Briefcase size={12} className="text-[var(--glow-amber)]" />
+                                                <span>Associate MSA · StellarPH100</span>
+                                            </div>
+                                        </div>
+                                        <div className="flex items-center justify-between gap-3">
+                                            <a
+                                                href={RESUME_PATH}
+                                                download
+                                                className="inline-flex items-center gap-2 rounded-full px-5 py-2 text-xs font-semibold font-[var(--font-inter)] text-[var(--ocean-deep)] bg-[var(--glow-amber)] hover:bg-[var(--glow-amber-deep)] transition-colors duration-200"
+                                            >
+                                                <Download size={13} />
+                                                Download Résumé
+                                            </a>
+                                            <div className="flex items-center gap-2">
+                                                {socials.map((social) => (
+                                                    <a
+                                                        key={social.label}
+                                                        href={social.href}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        aria-label={social.label}
+                                                        className="w-8 h-8 rounded-lg bg-[var(--ocean-deep)]/80 border border-[var(--ocean-border)] flex items-center justify-center text-[var(--mist-500)] hover:text-[var(--glow-amber)] hover:border-[var(--glow-amber)]/50 transition-colors duration-200"
+                                                    >
+                                                        <social.icon size={14} />
+                                                    </a>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    </div>
                             </div>
-
-                            {/* Info overlay at bottom of image */}
-                            <div className="absolute bottom-0 inset-x-0 p-6">
-                                <h3 className="font-[var(--font-space-grotesk)] font-bold text-[#EEF0F7] text-xl mb-0.5">
-                                    Rhandie J. Sales Jr.
-                                </h3>
-                                <p className="text-[#E8A87C] text-sm font-semibold font-[var(--font-inter)] mb-3">
-                                    Full-Stack Engineer
-                                </p>
-                                <div className="flex items-center gap-1.5 text-[#8A96B8] text-xs font-[var(--font-inter)] mb-1">
-                                    <MapPin size={12} />
-                                    <span>Philippines</span>
-                                </div>
-                                <div className="flex items-center gap-1.5 text-[#8A96B8] text-xs font-[var(--font-inter)] mb-4">
-                                    <Briefcase size={12} />
-                                    <span>Beta MSA · StellarPH100</span>
-                                </div>
-                                <div className="flex items-center gap-2 mb-4">
-                                    {socials.map((social) => (
-                                        <a
-                                            key={social.label}
-                                            href={social.href}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            aria-label={social.label}
-                                            className="w-8 h-8 rounded-lg bg-[#1A1F35]/80 border border-[#3D4F7C]/50 flex items-center justify-center text-[#8A96B8] hover:text-[#E8A87C] hover:border-[#E8A87C]/50 transition-all duration-200 hover:scale-110 backdrop-blur-sm"
-                                        >
-                                            <social.icon size={14} />
-                                        </a>
-                                    ))}
-                                </div>
-                                <a
-                                    href="/resume/SALES_Rhandie_Resume.pdf"
-                                    download
-                                    className="inline-flex items-center gap-2 rounded-full px-5 py-2 text-xs font-semibold font-[var(--font-inter)] text-[#1A1F35] bg-[#E8A87C] hover:bg-[#d9976d] transition-all duration-200 hover:scale-105 active:scale-95"
-                                >
-                                    <Download size={13} />
-                                    Download Résumé
-                                </a>
-                            </div>
-                        </div>
-                    </motion.div>
+                        </Reveal>
+                    </div>
 
                     {/* Right — Bio + Tech Stack */}
-                    <div className="lg:col-span-3 flex flex-col gap-6">
+                    <div className="relative lg:col-span-3 flex flex-col gap-6">
 
                         {/* Bio card */}
-                        <motion.div
-                            initial={{ opacity: 0, x: 30 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true, margin: "-40px" }}
-                            transition={{ duration: 0.6, delay: 0.25 }}
-                            className="relative rounded-2xl border border-[#3D4F7C]/40 bg-[#252B45]/50 p-7 overflow-hidden"
-                        >
-                            {/* Noise texture */}
-                            <div
-                                className="absolute inset-0 pointer-events-none opacity-[0.025] rounded-2xl"
-                                style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E\")", backgroundSize: "128px 128px" }}
-                            />
-                            <p className="text-[#8A96B8] text-sm leading-relaxed font-[var(--font-inter)]">
-                                I&apos;m <span className="text-[#EEF0F7] font-semibold">Rhandie J. Sales Jr.</span> — a Beta Microsoft Student Ambassador from the Philippines and a full-stack cloud-native developer
-                                specializing in <span className="text-[#EEF0F7]">React.js, TypeScript, and .NET</span>. I focus on writing clean, maintainable code and building
-                                scalable web applications, while working with cloud and AI technologies in practical projects.
+                        <Reveal className="relative rounded-2xl border border-[var(--ocean-border)] bg-[var(--ocean-surface)]/50 p-7">
+                            <p className="text-[var(--mist-300)] text-sm leading-relaxed font-[var(--font-inter)]">
+                                I&apos;m <span className="text-[var(--mist-100)] font-semibold">Rhandie J. Sales Jr.</span> — an Information Technology student and{" "}
+                                <span className="text-[var(--mist-100)] font-semibold">Co-Founder & Engineer at Axon Enjin</span>. A full-stack cloud-native developer specializing in{" "}
+                                <span className="text-[var(--mist-100)]">React, TypeScript, and Express</span>, with a focus on{" "}
+                                <span className="text-[var(--glow-amber)] font-semibold">AI Engineering through Azure Foundry models</span>.
                             </p>
-                            <p className="text-[#8A96B8] text-sm leading-relaxed font-[var(--font-inter)] mt-3">
-                                I serve in tech leadership roles within the{" "}
-                                <span className="text-[#EEF0F7]">Microsoft Student Community, Google Developer Groups,</span> and{" "}
-                                <span className="text-[#EEF0F7]">AWS Cloud Clubs</span>, and am part of the{" "}
-                                <span className="text-[#E8A87C] font-semibold">StellarPH100</span>, recognizing the country&apos;s greatest minds under 30.
+                            <p className="text-[var(--mist-300)] text-sm leading-relaxed font-[var(--font-inter)] mt-3">
+                                I serve in tech leadership roles across the Microsoft ecosystem as an{" "}
+                                <span className="text-[var(--mist-100)]">Associate Microsoft Student Ambassador</span>, and within{" "}
+                                <span className="text-[var(--mist-100)]">Google Developer Groups, AWS Cloud Clubs, and Seekers Guild</span>. I&apos;m part of the{" "}
+                                <span className="text-[var(--glow-amber)] font-semibold">StellarPH100</span>, recognizing the country&apos;s greatest minds under 30.
                             </p>
-                        </motion.div>
+
+                            {/* Community chips */}
+                            <div className="mt-5 flex flex-wrap gap-1.5">
+                                {communities.map((c) => (
+                                    <span
+                                        key={c}
+                                        className="rounded-full border border-[var(--ocean-border)] bg-[var(--ocean-deep)]/70 px-3 py-1 text-[11px] font-medium text-[var(--mist-300)] font-[var(--font-inter)]"
+                                    >
+                                        {c}
+                                    </span>
+                                ))}
+                            </div>
+                        </Reveal>
+
+                        {/* Highlights */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            {highlights.map((h, i) => (
+                                <motion.div
+                                    key={h.title}
+                                    initial={{ opacity: 0, y: 16 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true, margin: "-30px" }}
+                                    transition={{ duration: 0.5, delay: i * 0.06, ease: EASE_WATER }}
+                                    className="flex items-start gap-3 rounded-xl border border-[var(--ocean-border)] bg-[var(--ocean-surface)]/40 p-4"
+                                >
+                                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-[var(--glow-amber)]/30 bg-[var(--glow-amber)]/10 text-[var(--glow-amber)]">
+                                        <h.icon size={16} />
+                                    </div>
+                                    <div>
+                                        <p className="text-sm font-bold text-[var(--mist-100)] font-[var(--font-space-grotesk)]">
+                                            {h.title}
+                                        </p>
+                                        <p className="mt-0.5 text-xs leading-snug text-[var(--mist-500)] font-[var(--font-inter)]">
+                                            {h.detail}
+                                        </p>
+                                    </div>
+                                </motion.div>
+                            ))}
+                        </div>
 
                         {/* Tech Stack */}
                         <div className="flex flex-col gap-3">
                             {techStack.map((group, gi) => (
-                                <AnimatedListItem key={group.category} delay={0.3 + gi * 0.07}>
-                                    <div className={`relative rounded-xl border ${group.borderColor} bg-[#252B45]/40 p-4 overflow-hidden`}>
-                                        <div className={`text-[10px] font-bold tracking-widest uppercase ${group.color} font-[var(--font-inter)] mb-3`}>
+                                <motion.div
+                                    key={group.category}
+                                    initial={{ opacity: 0, y: 16 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true, margin: "-30px" }}
+                                    transition={{ duration: 0.5, delay: gi * 0.06, ease: EASE_WATER }}
+                                >
+                                    <div className="relative rounded-xl border border-[var(--ocean-border)] bg-[var(--ocean-surface)]/40 p-4">
+                                        <div className="text-[10px] font-bold tracking-[0.2em] uppercase text-[var(--glow-amber)] font-[var(--font-inter)] mb-3">
                                             {group.category}
                                         </div>
                                         <div className="flex flex-wrap gap-2">
                                             {group.items.map((tech) => (
                                                 <div
                                                     key={tech.label}
-                                                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#1A1F35]/70 border border-[#3D4F7C]/30 text-[#8A96B8] hover:text-[#EEF0F7] hover:border-[#3D4F7C]/60 transition-all duration-200 cursor-default"
+                                                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[var(--ocean-deep)]/70 border border-[var(--ocean-border)]/60 text-[var(--mist-500)] hover:text-[var(--mist-100)] hover:border-[var(--mist-700)] transition-colors duration-200 cursor-default"
                                                 >
                                                     <tech.icon width={14} height={14} aria-label={tech.label} />
                                                     <span className="text-xs font-medium font-[var(--font-inter)]">{tech.label}</span>
@@ -212,12 +240,12 @@ export default function AboutSection() {
                                             ))}
                                         </div>
                                     </div>
-                                </AnimatedListItem>
+                                </motion.div>
                             ))}
                         </div>
                     </div>
                 </div>
             </div>
-        </motion.section>
+        </section>
     );
 }

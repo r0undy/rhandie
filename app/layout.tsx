@@ -4,6 +4,7 @@ import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { SITE_URL, SITE_NAME, SITE_TITLE, SITE_DESCRIPTION, SOCIALS } from "@/lib/site";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -16,34 +17,101 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "rhandie.",
-  description:
-    "Portfolio of Rhandie J. Sales Jr., a full-stack cloud-native engineer from the Philippines specializing in Next.js, TypeScript, .NET, Django, and cloud platforms including Azure, AWS, and GCP.",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: SITE_TITLE,
+    template: "%s — Rhandie Sales",
+  },
+  description: SITE_DESCRIPTION,
   keywords: [
     "Rhandie",
     "Rhandie Sales",
     "Rhandie J. Sales Jr.",
     "Full-Stack Engineer Philippines",
     "Software Engineer Philippines",
+    "Tech Speaker Philippines",
+    "AI Engineer Philippines",
+    "Hackathon Champion Philippines",
     "Next.js Philippines",
     "TypeScript Philippines",
     "React Philippines",
     "Azure Philippines",
-    "AWS Philippines",
-    "GCP Philippines",
-    "Philippines",
-    "web development",
-    "MSA PH",
     "Microsoft Student Ambassador",
+    "MSA PH",
     "Beta MSA",
+    "StellarPH100",
   ],
-  authors: [{ name: "Rhandie J. Sales Jr." }],
-  openGraph: {
-    title: "rhandie.",
-    description:
-      "Full-stack cloud-native engineer building scalable web applications with Next.js, TypeScript, .NET, Django, and modern cloud platforms.",
-    type: "website",
+  authors: [{ name: SITE_NAME, url: SITE_URL }],
+  creator: SITE_NAME,
+  alternates: {
+    canonical: "/",
   },
+  openGraph: {
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    url: SITE_URL,
+    siteName: "rhandie.",
+    type: "website",
+    locale: "en_PH",
+    images: [
+      {
+        url: "/og.png",
+        width: 1200,
+        height: 630,
+        alt: "Rhandie Sales — Full-Stack Engineer & Tech Speaker",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    images: ["/og.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": `${SITE_URL}/#person`,
+      name: SITE_NAME,
+      url: SITE_URL,
+      jobTitle: "Full-Stack Engineer",
+      description: SITE_DESCRIPTION,
+      nationality: "Filipino",
+      knowsAbout: [
+        "Full-Stack Development",
+        "Cloud Computing",
+        "AI Engineering",
+        "Microsoft Azure",
+        "Next.js",
+        "TypeScript",
+        "Public Speaking",
+      ],
+      sameAs: [SOCIALS.github, SOCIALS.linkedin],
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${SITE_URL}/#website`,
+      url: SITE_URL,
+      name: "rhandie.",
+      description: SITE_DESCRIPTION,
+      publisher: { "@id": `${SITE_URL}/#person` },
+      inLanguage: "en",
+    },
+  ],
 };
 
 export default function RootLayout({
@@ -56,6 +124,10 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${spaceGrotesk.variable} antialiased bg-[#1A1F35] text-[#EEF0F7]`}
       >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <SmoothScroll>
           <Navbar />
           {children}
