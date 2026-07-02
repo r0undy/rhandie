@@ -97,7 +97,7 @@ export default function AboutSection() {
                         <Reveal className="h-full">
                             <div className="group relative h-full flex flex-col rounded-2xl border border-[var(--ocean-border)] bg-[var(--ocean-surface)]/50 overflow-hidden">
                                     {/* Photo — fills remaining height, only name + role overlaid */}
-                                    <div className="relative w-full overflow-hidden aspect-[4/5] lg:aspect-auto lg:flex-1 lg:min-h-[420px]">
+                                    <div className="relative w-full overflow-hidden aspect-[4/5] lg:aspect-auto lg:flex-1 lg:min-h-[320px]">
                                         <Image
                                             src="/team/rhandie.png"
                                             alt="Rhandie J. Sales Jr."
@@ -157,7 +157,7 @@ export default function AboutSection() {
                         </Reveal>
                     </div>
 
-                    {/* Right — Bio + Tech Stack */}
+                    {/* Right — Bio + Highlights */}
                     <div className="relative lg:col-span-3 flex flex-col gap-6">
 
                         {/* Bio card */}
@@ -189,7 +189,7 @@ export default function AboutSection() {
                         </Reveal>
 
                         {/* Highlights */}
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 lg:flex-1">
                             {highlights.map((h, i) => (
                                 <motion.div
                                     key={h.title}
@@ -213,37 +213,38 @@ export default function AboutSection() {
                                 </motion.div>
                             ))}
                         </div>
-
-                        {/* Tech Stack */}
-                        <div className="flex flex-col gap-3">
-                            {techStack.map((group, gi) => (
-                                <motion.div
-                                    key={group.category}
-                                    initial={{ opacity: 0, y: 16 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true, margin: "-30px" }}
-                                    transition={{ duration: 0.5, delay: gi * 0.06, ease: EASE_WATER }}
-                                >
-                                    <div className="relative rounded-xl border border-[var(--ocean-border)] bg-[var(--ocean-surface)]/40 p-4">
-                                        <div className="text-[10px] font-bold tracking-[0.2em] uppercase text-[var(--glow-amber)] font-[var(--font-inter)] mb-3">
-                                            {group.category}
-                                        </div>
-                                        <div className="flex flex-wrap gap-2">
-                                            {group.items.map((tech) => (
-                                                <div
-                                                    key={tech.label}
-                                                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[var(--ocean-deep)]/70 border border-[var(--ocean-border)]/60 text-[var(--mist-500)] hover:text-[var(--mist-100)] hover:border-[var(--mist-700)] transition-colors duration-200 cursor-default"
-                                                >
-                                                    <tech.icon width={14} height={14} aria-label={tech.label} />
-                                                    <span className="text-xs font-medium font-[var(--font-inter)]">{tech.label}</span>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </div>
-                                </motion.div>
-                            ))}
-                        </div>
                     </div>
+                </div>
+
+                {/* Tech Stack — full-width bento row */}
+                <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                    {techStack.map((group, gi) => (
+                        <motion.div
+                            key={group.category}
+                            initial={{ opacity: 0, y: 16 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-30px" }}
+                            transition={{ duration: 0.5, delay: gi * 0.06, ease: EASE_WATER }}
+                            className="h-full"
+                        >
+                            <div className="relative h-full rounded-xl border border-[var(--ocean-border)] bg-[var(--ocean-surface)]/40 p-4">
+                                <div className="text-[10px] font-bold tracking-[0.2em] uppercase text-[var(--glow-amber)] font-[var(--font-inter)] mb-3">
+                                    {group.category}
+                                </div>
+                                <div className="flex flex-wrap gap-2">
+                                    {group.items.map((tech) => (
+                                        <div
+                                            key={tech.label}
+                                            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[var(--ocean-deep)]/70 border border-[var(--ocean-border)]/60 text-[var(--mist-500)] hover:text-[var(--mist-100)] hover:border-[var(--mist-700)] transition-colors duration-200 cursor-default"
+                                        >
+                                            <tech.icon width={14} height={14} aria-label={tech.label} />
+                                            <span className="text-xs font-medium font-[var(--font-inter)]">{tech.label}</span>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </motion.div>
+                    ))}
                 </div>
             </div>
         </section>
