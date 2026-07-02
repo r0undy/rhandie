@@ -1,146 +1,250 @@
 "use client";
 
-import { motion } from "motion/react";
-import { BlurFade } from "@/components/ui/magic-ui";
-import { Mic, Users, PresentationIcon, ExternalLink, FileDown, MapPin, Calendar } from "lucide-react";
-import speakingData from "@/data/speaking.json";
+import { useEffect, useState } from "react";
+import Image from "next/image";
+import { motion, AnimatePresence } from "motion/react";
+import { X, MapPin, Calendar, Users, Video, Presentation } from "lucide-react";
+import { Reveal, SectionHeader, EASE_WATER } from "@/components/ui/motion";
+import speaking from "@/data/speaking.json";
 
-type SpeakingEvent = {
+type Talk = {
+    slug: string;
     title: string;
     event: string;
     date: string;
     type: string;
     description: string;
     location: string;
+    audience: string;
+    topics: string[];
+    highlights: string[];
+    thumbnail: string;
+    gallery: string[];
     recordingUrl: string;
     slidesUrl: string;
 };
 
-const speakingEvents: SpeakingEvent[] = speakingData;
+const talks = speaking as unknown as Talk[];
 
-const typeConfig: Record<string, { color: string; bgColor: string; borderColor: string; Icon: React.ElementType }> = {
-    "Speaker": {
-        color: "text-[#E8A87C]",
-        bgColor: "bg-[#E8A87C]/10",
-        borderColor: "border-[#E8A87C]/25",
-        Icon: Mic,
-    },
-    "Panelist": {
-        color: "text-[#9BADD0]",
-        bgColor: "bg-[#6B7BAD]/15",
-        borderColor: "border-[#6B7BAD]/30",
-        Icon: Users,
-    },
-    "Facilitator": {
-        color: "text-[#7EC8A8]",
-        bgColor: "bg-[#3D8C6B]/10",
-        borderColor: "border-[#3D8C6B]/25",
-        Icon: PresentationIcon,
-    },
+const TYPE_STYLES: Record<string, string> = {
+    Speaker: "bg-[var(--glow-amber)]/15 text-[var(--glow-amber)] border-[var(--glow-amber)]/40",
+    Panelist: "bg-[var(--mist-700)]/15 text-[var(--mist-300)] border-[var(--mist-700)]/40",
+    Facilitator: "bg-[var(--mist-700)]/15 text-[var(--mist-300)] border-[var(--mist-700)]/40",
 };
 
-export default function SpeakingSection() {
+function TalkModal({ talk, onClose }: { talk: Talk; onClose: () => void }) {
+    useEffect(() => {
+        const onKey = (e: KeyboardEvent) => {
+            if (e.key === "Escape") onClose();
+        };
+        document.addEventListener("keydown", onKey);
+        document.body.style.overflow = "hidden";
+        return () => {
+            document.removeEventListener("keydown", onKey);
+            document.body.style.overflow = "";
+        };
+    }, [onClose]);
+
     return (
-        <section id="speaking" className="py-28 px-6 bg-[#141829]">
-            <div className="max-w-6xl mx-auto">
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            onClick={onClose}
+            className="fixed inset-0 z-[110] flex items-end sm:items-center justify-center bg-[var(--ocean-abyss)]/80 backdrop-blur-sm sm:p-6"
+            role="dialog"
+            aria-modal="true"
+            aria-label={talk.title}
+        >
+            <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 24 }}
+                transition={{ duration: 0.35, ease: EASE_WATER }}
+                onClick={(e) => e.stopPropagation()}
+                data-lenis-prevent
+                className="relative flex w-full max-w-3xl flex-col overflow-hidden rounded-t-2xl border border-[var(--ocean-border)] bg-[var(--ocean-surface)] max-h-[92dvh] sm:max-h-[85dvh] sm:rounded-2xl"
+            >
+                <button
+                    onClick={onClose}
+                    aria-label="Close details"
+                    className="absolute right-3 top-3 z-10 flex h-9 w-9 items-center justify-center rounded-full border border-[var(--ocean-border)] bg-[var(--ocean-deep)]/80 text-[var(--mist-300)] backdrop-blur transition-colors hover:text-[var(--mist-100)] sm:right-4 sm:top-4"
+                >
+                    <X size={16} />
+                </button>
 
-                <BlurFade delay={0.1}>
-                    <div className="mb-16 text-center">
-                        <span className="inline-block mb-3 text-xs font-semibold tracking-widest text-[#E8A87C] uppercase font-[var(--font-inter)]">
-                            Stage
-                        </span>
-                        <h2 className="font-[var(--font-space-grotesk)] text-4xl sm:text-5xl font-bold text-[#EEF0F7] mb-5">
-                            Speaking <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#E8A87C] to-[#6B7BAD]">Opportunities</span>
-                        </h2>
-                        <p className="max-w-xl mx-auto text-[#8A96B8] text-lg font-[var(--font-inter)]">
-                            Talks, panels, and workshops on cloud infrastructure, full-stack engineering, and tech leadership.
-                        </p>
+                {/* Scrollable content */}
+                <div className="overflow-y-auto overscroll-contain">
+                    {/* Hero thumbnail */}
+                    <div className="relative aspect-[16/8] w-full shrink-0 overflow-hidden bg-[var(--ocean-mid)] sm:aspect-[16/7]">
+                        <Image
+                            src={talk.thumbnail}
+                            alt={`${talk.title} thumbnail`}
+                            fill
+                            sizes="(max-width: 768px) 100vw, 768px"
+                            className="object-cover"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-[var(--ocean-surface)] via-transparent to-transparent" />
                     </div>
-                </BlurFade>
 
-                <div className="flex flex-col gap-4">
-                    {speakingEvents.map((evt, i) => {
-                        const cfg = typeConfig[evt.type] ?? typeConfig["Speaker"];
-                        const TypeIcon = cfg.Icon;
+                    <div className="p-5 sm:p-8">
+                        <span
+                            className={`mb-3 inline-block rounded-full border px-3 py-1 text-xs font-semibold font-[var(--font-inter)] ${TYPE_STYLES[talk.type] ?? TYPE_STYLES.Panelist}`}
+                        >
+                            {talk.type}
+                        </span>
+                        <h3 className="mb-1 font-[var(--font-space-grotesk)] text-xl font-bold text-[var(--mist-100)] sm:text-2xl">
+                            {talk.title}
+                        </h3>
+                        <p className="mb-4 text-sm font-semibold text-[var(--glow-amber)] font-[var(--font-inter)]">
+                            {talk.event}
+                        </p>
 
-                        return (
-                            <BlurFade key={i} delay={0.15 + i * 0.08}>
-                                <motion.div
-                                    whileHover={{ x: 4 }}
-                                    transition={{ duration: 0.2, ease: "easeOut" }}
-                                    className="group relative rounded-2xl border border-[#3D4F7C]/40 bg-[#252B45]/50 hover:border-[#6B7BAD]/50 transition-all duration-300 overflow-hidden"
+                        <div className="mb-5 flex flex-col gap-2 text-sm text-[var(--mist-500)] font-[var(--font-inter)] sm:flex-row sm:flex-wrap sm:gap-x-5">
+                            <span className="inline-flex items-center gap-1.5">
+                                <Calendar size={14} className="shrink-0" /> {talk.date}
+                            </span>
+                            <span className="inline-flex items-center gap-1.5">
+                                <MapPin size={14} className="shrink-0" /> {talk.location}
+                            </span>
+                            <span className="inline-flex items-center gap-1.5">
+                                <Users size={14} className="shrink-0" /> {talk.audience}
+                            </span>
+                        </div>
+
+                        <p className="mb-5 text-sm leading-relaxed text-[var(--mist-300)] font-[var(--font-inter)] sm:text-base">
+                            {talk.description}
+                        </p>
+
+                        {/* Highlights */}
+                        <ul className="mb-6 space-y-1.5">
+                            {talk.highlights.map((h) => (
+                                <li
+                                    key={h}
+                                    className="flex items-start gap-2 text-sm text-[var(--mist-300)] font-[var(--font-inter)]"
                                 >
-                                    {/* Noise texture */}
-                                    <div
-                                        className="absolute inset-0 pointer-events-none opacity-[0.025]"
-                                        style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E\")", backgroundSize: "128px 128px" }}
+                                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--glow-amber)]" />
+                                    {h}
+                                </li>
+                            ))}
+                        </ul>
+
+                        {/* Topics */}
+                        <div className="mb-6 flex flex-wrap gap-1.5">
+                            {talk.topics.map((topic) => (
+                                <span
+                                    key={topic}
+                                    className="rounded-md border border-[var(--ocean-border)] bg-[var(--ocean-mid)] px-2 py-0.5 text-xs text-[var(--mist-300)] font-[var(--font-inter)]"
+                                >
+                                    {topic}
+                                </span>
+                            ))}
+                        </div>
+
+                        {/* Photo collage */}
+                        <div className="mb-6 grid grid-cols-2 gap-2 sm:grid-cols-4">
+                            {talk.gallery.map((src, i) => (
+                                <div
+                                    key={src}
+                                    className="relative aspect-[4/3] overflow-hidden rounded-lg bg-[var(--ocean-mid)]"
+                                >
+                                    <Image
+                                        src={src}
+                                        alt={`${talk.title} photo ${i + 1}`}
+                                        fill
+                                        sizes="(max-width: 640px) 50vw, 200px"
+                                        className="object-cover"
                                     />
-                                    {/* Left accent bar */}
-                                    <div className={`absolute left-0 top-0 bottom-0 w-1 ${cfg.bgColor} opacity-80 group-hover:opacity-100 transition-opacity`} />
+                                </div>
+                            ))}
+                        </div>
 
-                                    <div className="pl-8 pr-6 py-6 flex flex-col sm:flex-row sm:items-center gap-5">
+                        {/* Links */}
+                        <div className="flex gap-3">
+                            {talk.recordingUrl !== "#" && (
+                                <a
+                                    href={talk.recordingUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--glow-amber)] hover:text-[var(--glow-amber-deep)] transition-colors font-[var(--font-inter)]"
+                                >
+                                    <Video size={14} /> Recording
+                                </a>
+                            )}
+                            {talk.slidesUrl !== "#" && (
+                                <a
+                                    href={talk.slidesUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--mist-300)] hover:text-[var(--mist-100)] transition-colors font-[var(--font-inter)]"
+                                >
+                                    <Presentation size={14} /> Slides
+                                </a>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            </motion.div>
+        </motion.div>
+    );
+}
 
-                                        {/* Icon */}
-                                        <div className={`shrink-0 w-12 h-12 rounded-xl ${cfg.bgColor} border ${cfg.borderColor} flex items-center justify-center`}>
-                                            <TypeIcon size={20} className={cfg.color} />
-                                        </div>
+export default function SpeakingSection() {
+    const [selected, setSelected] = useState<Talk | null>(null);
 
-                                        {/* Content */}
-                                        <div className="flex-1 min-w-0">
-                                            <div className="flex flex-wrap items-center gap-2 mb-1">
-                                                <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold font-[var(--font-inter)] ${cfg.bgColor} ${cfg.color} border ${cfg.borderColor}`}>
-                                                    {evt.type}
-                                                </span>
-                                                <span className="text-[#5A6485] text-[10px] font-[var(--font-inter)] flex items-center gap-1">
-                                                    <Calendar size={9} />
-                                                    {evt.date}
-                                                </span>
-                                            </div>
-                                            <h3 className="font-[var(--font-space-grotesk)] font-bold text-[#EEF0F7] text-base mb-0.5">
-                                                {evt.title}
-                                            </h3>
-                                            <p className="text-[#E8A87C] text-xs font-semibold font-[var(--font-inter)] mb-2">{evt.event}</p>
-                                            <p className="text-[#8A96B8] text-sm font-[var(--font-inter)] leading-relaxed mb-2">{evt.description}</p>
-                                            <div className="flex items-center gap-1.5 text-[#5A6485] text-xs font-[var(--font-inter)]">
-                                                <MapPin size={10} />
-                                                <span>{evt.location}</span>
-                                            </div>
-                                        </div>
+    return (
+        <section id="speaking" className="caustic-light relative py-24 px-6">
+            <div className="mx-auto max-w-6xl">
+                <SectionHeader
+                    eyebrow="Speaking"
+                    title="Talks & Engagements"
+                    description="Tech talks, panels, and workshops on cloud, AI, and full-stack engineering across the Philippine developer community."
+                />
 
-                                        {/* Actions */}
-                                        <div className="flex items-center gap-2 shrink-0">
-                                            {evt.recordingUrl !== "#" && (
-                                                <a
-                                                    href={evt.recordingUrl}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#1A1F35] border border-[#3D4F7C]/40 text-[#8A96B8] hover:text-[#E8A87C] hover:border-[#E8A87C]/40 transition-all duration-200 text-xs font-[var(--font-inter)]"
-                                                    title="View Recording"
-                                                >
-                                                    <ExternalLink size={12} />
-                                                    <span className="hidden sm:inline">Recording</span>
-                                                </a>
-                                            )}
-                                            {evt.slidesUrl !== "#" && (
-                                                <a
-                                                    href={evt.slidesUrl}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#1A1F35] border border-[#3D4F7C]/40 text-[#8A96B8] hover:text-[#9BADD0] hover:border-[#6B7BAD]/40 transition-all duration-200 text-xs font-[var(--font-inter)]"
-                                                    title="View Slides"
-                                                >
-                                                    <FileDown size={12} />
-                                                    <span className="hidden sm:inline">Slides</span>
-                                                </a>
-                                            )}
-                                        </div>
+                <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                    {talks.map((talk, i) => (
+                        <Reveal key={talk.slug} delay={i * 0.08}>
+                            <button
+                                onClick={() => setSelected(talk)}
+                                className="group w-full overflow-hidden rounded-2xl border border-[var(--ocean-border)] bg-[var(--ocean-surface)] text-left transition-colors duration-300 hover:border-[var(--glow-amber)]/60"
+                            >
+                                <div className="relative aspect-[16/8] overflow-hidden bg-[var(--ocean-mid)]">
+                                    <Image
+                                        src={talk.thumbnail}
+                                        alt={`${talk.title} thumbnail`}
+                                        fill
+                                        sizes="(max-width: 640px) 100vw, 50vw"
+                                        className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+                                    />
+                                </div>
+                                <div className="p-5">
+                                    <div className="mb-2 flex items-center justify-between gap-3">
+                                        <span
+                                            className={`rounded-full border px-2.5 py-0.5 text-xs font-semibold font-[var(--font-inter)] ${TYPE_STYLES[talk.type] ?? TYPE_STYLES.Panelist}`}
+                                        >
+                                            {talk.type}
+                                        </span>
+                                        <span className="text-xs text-[var(--mist-500)] font-[var(--font-inter)]">
+                                            {talk.date}
+                                        </span>
                                     </div>
-                                </motion.div>
-                            </BlurFade>
-                        );
-                    })}
+                                    <h3 className="mb-1 font-[var(--font-space-grotesk)] text-lg font-bold text-[var(--mist-100)] group-hover:text-[var(--glow-amber)] transition-colors">
+                                        {talk.title}
+                                    </h3>
+                                    <p className="text-sm text-[var(--mist-500)] font-[var(--font-inter)]">
+                                        {talk.event}
+                                    </p>
+                                </div>
+                            </button>
+                        </Reveal>
+                    ))}
                 </div>
             </div>
+
+            <AnimatePresence>
+                {selected && <TalkModal talk={selected} onClose={() => setSelected(null)} />}
+            </AnimatePresence>
         </section>
     );
 }

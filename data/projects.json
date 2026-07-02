@@ -1,62 +1,69 @@
 [
   {
+    "slug": "mate",
+    "title": "Mate",
+    "tagline": "Autonomous Academic Orchestrator for Filipino University Students",
+    "description": "A Microsoft Copilot–powered SaaS that reads every syllabus, names the weeks where deadlines collide, and plans your study time around your real Outlook calendar and Teams availability.",
+    "year": "2026",
+    "categories": ["Web", "Cloud Computing", "AI Engineering", "Hackathon"],
+    "techByCategory": {
+      "Web": ["Next.js", "PWA"],
+      "Cloud Computing": ["Microsoft Azure", "Cosmos DB"],
+      "AI Engineering": ["Microsoft Copilot"],
+      "Hackathon": ["Champion"]
+    },
+    "hackathon": { "placement": "Champion" },
+    "links": { "live": "#", "github": "#" },
+    "thumbnail": "/project_thumbnails/Mate_thumbnail.png",
+    "icon": "/project_icons/mate.png"
+  },
+  {
+    "slug": "archon",
+    "title": "Archon",
+    "tagline": "Agentic AI-Powered Service Desk for Higher Education",
+    "description": "An autonomous, agentic AI service desk designed specifically for Philippine universities — eliminating the student experience deficit by bridging fragmented bureaucracy across Registrar, Bursar, and Financial Aid departments.",
+    "year": "2026",
+    "categories": ["Web", "Cloud Computing", "AI Engineering", "Hackathon"],
+    "techByCategory": {
+      "Web": ["Next.js", "PWA"],
+      "Cloud Computing": ["Microsoft Azure", "Cosmos DB", "Entra ID", "M365 Integration"],
+      "AI Engineering": ["Azure AI Foundry"],
+      "Hackathon": ["Champion"]
+    },
+    "hackathon": { "placement": "Champion" },
+    "links": { "live": "#", "github": "#" },
+    "thumbnail": "/project_thumbnails/Archon_thumbnail.png",
+    "icon": "/project_icons/archon.png"
+  },
+  {
+    "slug": "fetch",
     "title": "Fetch",
-    "description": "A full-stack smart lost-and-found system for school communities with a modern interface, secure row-level security, automated item matching, claim workflows, and real-time notifications.",
-    "tags": ["React", "Next.js", "Tailwind CSS", "Node.js", "Express.js"],
-    "live": "http://pup-fetch.vercel.app/",
-    "github": "https://github.com/Roundyy/fetch",
+    "tagline": "Smart lost-and-found for school communities",
+    "description": "A full-stack lost-and-found system with secure row-level security, automated item matching, claim workflows, and real-time notifications.",
+    "year": "2025",
+    "categories": ["Web"],
+    "techByCategory": {
+      "Web": ["React", "Next.js", "Tailwind CSS", "Node.js", "Express.js"]
+    },
+    "hackathon": null,
+    "links": { "live": "http://pup-fetch.vercel.app/", "github": "https://github.com/Roundyy/fetch" },
     "thumbnail": "/project_thumbnails/Fetch_thumbnail.png",
-    "type": "Web App",
-    "year": "2025"
+    "icon": "/project_icons/fetch.png"
   },
   {
+    "slug": "stallmate",
     "title": "StallMate",
-    "description": "A full-stack smart POS and inventory management system for PUP Lagoon stalls, with AI-driven insights and interactive dashboards to streamline operations and decision-making.",
-    "tags": ["Next.js", "Firebase", "Tailwind CSS"],
-    "live": "https://stall-mate-2025.vercel.app/",
-    "github": "https://github.com/Roundyy/stallmate",
+    "tagline": "Smart POS and inventory for campus stalls",
+    "description": "A full-stack POS and inventory management system for PUP Lagoon stalls, with AI-driven insights and interactive dashboards that streamline daily operations.",
+    "year": "2025",
+    "categories": ["Web", "AI Engineering"],
+    "techByCategory": {
+      "Web": ["Next.js", "Firebase", "Tailwind CSS"],
+      "AI Engineering": ["AI Insights"]
+    },
+    "hackathon": null,
+    "links": { "live": "https://stall-mate-2025.vercel.app/", "github": "https://github.com/Roundyy/stallmate" },
     "thumbnail": "/project_thumbnails/Stallmate_thumbnail.png",
-    "type": "Web App",
-    "year": "2025"
-  },
-  {
-    "title": "I-70 Clinic App",
-    "description": "A digital system for government-funded clinics that manages employee medical registrations, replacing manual I-70 forms with a normalized relational database to ensure data integrity and streamline patient information management.",
-    "tags": ["Java", "MySQL"],
-    "live": "#",
-    "github": "https://github.com/BryanButtowski/I70-CLINIC-APP",
-    "thumbnail": "/project_thumbnails/I70Clinic_thumbnail.png",
-    "type": "Java App",
-    "year": "2024"
-  },
-  {
-    "title": "Tsyek: Barangay Management System",
-    "description": "A digital solution tailored to the operational needs of barangay offices. It offers a straightforward way for barangay staff to handle inventory records, making routine tasks simpler and faster.",
-    "tags": ["Java"],
-    "live": "#",
-    "github": "https://github.com/drchl/Tsyek-Barangay-Inventory-Management-System",
-    "thumbnail": "/project_thumbnails/Tsyek_thumbnail.png",
-    "type": "Java App",
-    "year": "2024"
-  },
-  {
-    "title": "MyndSave",
-    "description": "A comprehensive budgeting tool designed to help users manage finances effortlessly. Features income tracking, expense management, budget goals, and detailed spending breakdowns by category.",
-    "tags": ["Node.js", "Express", "PostgreSQL"],
-    "live": "#",
-    "github": "#",
-    "thumbnail": "https://placehold.co/600x340/252B45/E8A87C?text=MyndSave",
-    "type": "Web App",
-    "year": "2024"
-  },
-  {
-    "title": "PAG-IBIG System Database",
-    "description": "A database system designed around the PAG-IBIG membership form to improve data organization and efficiency by eliminating redundancy and ensuring data integrity.",
-    "tags": ["Next.js", "Chart.js", "Python"],
-    "live": "#",
-    "github": "#",
-    "thumbnail": "https://placehold.co/600x340/252B45/6B7BAD?text=PAG-IBIG",
-    "type": "Backend / API",
-    "year": "2023"
+    "icon": "/project_icons/stallmate.png"
   }
 ]

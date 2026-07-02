@@ -1,7 +1,7 @@
 import ParallaxHero from "@/components/hero/ParallaxHero";
 import AboutSection from "@/components/about/AboutSection";
 import ProjectsSection from "@/components/projects/ProjectsSection";
-import CertificationsSection from "@/components/certifications/CertificationsSection";
+import CredentialsSection from "@/components/credentials/CredentialsSection";
 import SpeakingSection from "@/components/speaking/SpeakingSection";
 import ContactSection from "@/components/contact/ContactSection";
 
@@ -11,7 +11,7 @@ export default function Home() {
       <ParallaxHero />
       <AboutSection />
       <ProjectsSection />
-      <CertificationsSection />
+      <CredentialsSection />
       <SpeakingSection />
       <ContactSection />
     </main>
