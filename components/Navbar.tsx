@@ -3,13 +3,25 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Menu, X } from "lucide-react";
+import { usePortfolioMode } from "@/components/portfolio/PortfolioModeContext";
 
-const navLinks = [
-    { label: "About", href: "#about" },
-    { label: "Projects", href: "#projects" },
-    { label: "Credentials", href: "#credentials" },
-    { label: "Speaking", href: "#speaking" },
-];
+const NAV_LINKS = {
+    technical: [
+        { label: "About", href: "#about" },
+        { label: "Projects", href: "#projects" },
+        { label: "Credentials", href: "#credentials" },
+    ],
+    speaker: [
+        { label: "About", href: "#about" },
+        { label: "Speaking", href: "#speaking" },
+    ],
+    all: [
+        { label: "About", href: "#about" },
+        { label: "Projects", href: "#projects" },
+        { label: "Credentials", href: "#credentials" },
+        { label: "Speaking", href: "#speaking" },
+    ],
+};
 
 // Smooth scroll helper that works with Lenis
 function scrollTo(id: string) {
@@ -20,6 +32,8 @@ function scrollTo(id: string) {
 export default function Navbar() {
     const [scrolled, setScrolled] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
+    const { mode } = usePortfolioMode();
+    const navLinks = mode ? NAV_LINKS[mode] : NAV_LINKS.all;
 
     useEffect(() => {
         const handleScroll = () => setScrolled(window.scrollY > 60);

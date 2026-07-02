@@ -20,6 +20,7 @@
       "/speaking/cloud-native-azure/3.png",
       "/speaking/cloud-native-azure/4.png"
     ],
+    "eventUrl": "#",
     "recordingUrl": "#",
     "slidesUrl": "#"
   },
@@ -44,6 +45,7 @@
       "/speaking/fullstack-devfest/3.png",
       "/speaking/fullstack-devfest/4.png"
     ],
+    "eventUrl": "#",
     "recordingUrl": "#",
     "slidesUrl": "#"
   },
@@ -68,6 +70,7 @@
       "/speaking/aws-cloud-club-kickoff/3.png",
       "/speaking/aws-cloud-club-kickoff/4.png"
     ],
+    "eventUrl": "#",
     "recordingUrl": "#",
     "slidesUrl": "#"
   },
@@ -92,6 +95,7 @@
       "/speaking/stellarph100-panel/3.png",
       "/speaking/stellarph100-panel/4.png"
     ],
+    "eventUrl": "#",
     "recordingUrl": "#",
     "slidesUrl": "#"
   }

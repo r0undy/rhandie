@@ -4,6 +4,7 @@ import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { PortfolioModeProvider } from "@/components/portfolio/PortfolioModeContext";
 import { SITE_URL, SITE_NAME, SITE_TITLE, SITE_DESCRIPTION, SOCIALS } from "@/lib/site";
 
 const inter = Inter({
@@ -129,9 +130,11 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <SmoothScroll>
-          <Navbar />
-          {children}
-          <Footer />
+          <PortfolioModeProvider>
+            <Navbar />
+            {children}
+            <Footer />
+          </PortfolioModeProvider>
         </SmoothScroll>
       </body>
     </html>
