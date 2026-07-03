@@ -3,13 +3,25 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Menu, X } from "lucide-react";
+import { usePortfolioMode } from "@/components/portfolio/PortfolioModeContext";
 
-const navLinks = [
-    { label: "About", href: "#about" },
-    { label: "Projects", href: "#projects" },
-    { label: "Certifications", href: "#certifications" },
-    { label: "Speaking", href: "#speaking" },
-];
+const NAV_LINKS = {
+    technical: [
+        { label: "About", href: "#about" },
+        { label: "Projects", href: "#projects" },
+        { label: "Credentials", href: "#credentials" },
+    ],
+    speaker: [
+        { label: "About", href: "#about" },
+        { label: "Speaking", href: "#speaking" },
+    ],
+    all: [
+        { label: "About", href: "#about" },
+        { label: "Projects", href: "#projects" },
+        { label: "Credentials", href: "#credentials" },
+        { label: "Speaking", href: "#speaking" },
+    ],
+};
 
 // Smooth scroll helper that works with Lenis
 function scrollTo(id: string) {
@@ -20,6 +32,8 @@ function scrollTo(id: string) {
 export default function Navbar() {
     const [scrolled, setScrolled] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
+    const { mode } = usePortfolioMode();
+    const navLinks = mode ? NAV_LINKS[mode] : NAV_LINKS.all;
 
     useEffect(() => {
         const handleScroll = () => setScrolled(window.scrollY > 60);
@@ -46,7 +60,7 @@ export default function Navbar() {
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
             className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 ${scrolled || menuOpen
-                ? "backdrop-blur-md bg-[#1A1F35]/90 border-b border-[#3D4F7C]/40 shadow-lg shadow-black/20"
+                ? "backdrop-blur-md bg-[var(--ocean-deep)]/90 border-b border-[var(--ocean-border)]/60 shadow-lg shadow-black/20"
                 : "bg-transparent border-b border-transparent"
                 }`}
         >
@@ -58,7 +72,7 @@ export default function Navbar() {
                     whileHover={{ scale: 1.03 }}
                     className="font-[var(--font-space-grotesk)] font-semibold text-white text-xl tracking-tight"
                 >
-                    rhandie<span className="text-[#E8A87C]">.</span>
+                    rhandie<span className="text-[var(--glow-amber)]">.</span>
                 </motion.a>
 
                 {/* Desktop nav */}
@@ -77,7 +91,7 @@ export default function Navbar() {
                         onClick={() => handleNavClick("#contact")}
                         whileHover={{ scale: 1.03 }}
                         whileTap={{ scale: 0.97 }}
-                        className="px-4 py-2 rounded-lg bg-[#E8A87C] text-[#1A1F35] text-sm font-semibold font-[var(--font-inter)] transition-shadow hover:bg-[#d9976d] cursor-pointer"
+                        className="px-4 py-2 rounded-full bg-[var(--glow-amber)] text-[var(--ocean-deep)] text-sm font-semibold font-[var(--font-inter)] hover:bg-[var(--glow-amber-deep)] transition-colors cursor-pointer"
                     >
                         Contact
                     </motion.button>
@@ -113,14 +127,14 @@ export default function Navbar() {
                         animate={{ height: "auto", opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
                         transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-                        className="md:hidden overflow-hidden bg-[#1A1F35]/98 border-t border-[#3D4F7C]/30"
+                        className="md:hidden overflow-hidden bg-[var(--ocean-deep)]/98 border-t border-[var(--ocean-border)]/40"
                     >
                         <ul className="px-6 py-5 flex flex-col gap-1">
                             {navLinks.map((link) => (
                                 <li key={link.href}>
                                     <button
                                         onClick={() => handleNavClick(link.href)}
-                                        className="w-full text-left px-3 py-3 rounded-lg text-[#8A96B8] hover:text-[#EEF0F7] hover:bg-white/5 text-base font-medium transition-all duration-150 font-[var(--font-inter)] cursor-pointer"
+                                        className="w-full text-left px-3 py-3 rounded-lg text-[var(--mist-500)] hover:text-[var(--mist-100)] hover:bg-white/5 text-base font-medium transition-colors duration-150 font-[var(--font-inter)] cursor-pointer"
                                     >
                                         {link.label}
                                     </button>
@@ -129,7 +143,7 @@ export default function Navbar() {
                             <li className="pt-2">
                                 <button
                                     onClick={() => handleNavClick("#contact")}
-                                    className="w-full px-3 py-3 rounded-lg bg-[#E8A87C] text-[#1A1F35] text-sm font-semibold font-[var(--font-inter)] hover:bg-[#d9976d] transition-colors cursor-pointer"
+                                    className="w-full px-3 py-3 rounded-full bg-[var(--glow-amber)] text-[var(--ocean-deep)] text-sm font-semibold font-[var(--font-inter)] hover:bg-[var(--glow-amber-deep)] transition-colors cursor-pointer"
                                 >
                                     Contact
                                 </button>

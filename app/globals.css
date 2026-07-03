@@ -1,7 +1,29 @@
 @import "tailwindcss";
 
+/* ── Ocean design tokens ─────────────────────────────────── */
+
 :root {
   color-scheme: dark;
+
+  /* Depth palette — abyss navy base */
+  --ocean-abyss: #12162a;
+  --ocean-deep: #1a1f35;
+  --ocean-mid: #212844;
+  --ocean-surface: #252b45;
+  --ocean-border: #323a5c;
+
+  /* Mist / text */
+  --mist-100: #eef0f7;
+  --mist-300: #b8bfd6;
+  --mist-500: #8b93b0;
+  --mist-700: #6b7bad;
+
+  /* Bioluminescent accent */
+  --glow-amber: #e8a87c;
+  --glow-amber-deep: #d4956a;
+
+  /* Water-like easing */
+  --ease-water: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 html {
@@ -9,91 +31,83 @@ html {
 }
 
 body {
-  background-color: #1A1F35;
-  color: #EEF0F7;
+  background-color: var(--ocean-deep);
+  color: var(--mist-100);
+  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 }
 
-/* ── Magic UI animation keyframes ─────────────────────────── */
-
-@keyframes shimmer-slide {
-  to {
-    transform: translate(calc(100cqw - 100%), 0);
-  }
+/* Tailwind treats `font-[var(--font-*)]` as ambiguous (font-weight), so the
+   font-family never applied. Resolve those utilities explicitly. */
+[class*="font-[var(--font-space-grotesk)]"] {
+  font-family: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
 }
 
-@keyframes spin-around {
-  0% {
-    transform: translateZ(0) rotate(0);
-  }
-
-  15%,
-  35% {
-    transform: translateZ(0) rotate(90deg);
-  }
-
-  65%,
-  85% {
-    transform: translateZ(0) rotate(270deg);
-  }
-
-  100% {
-    transform: translateZ(0) rotate(360deg);
-  }
+[class*="font-[var(--font-inter)]"] {
+  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 }
 
-@keyframes meteor-effect {
-  0% {
-    transform: translateY(0);
-    opacity: 1;
-  }
+::selection {
+  background-color: rgba(232, 168, 124, 0.3);
+  color: var(--mist-100);
+}
 
-  80% {
-    opacity: 0.6;
-  }
+/* ── Motion system ────────────────────────────────────────── */
 
-  100% {
-    transform: translateY(700px);
+/* Rise: content surfaces upward like a bubble */
+@keyframes rise {
+  from {
     opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-@keyframes border-beam {
-  100% {
-    offset-distance: 100%;
-  }
-}
-
-@keyframes shiny-text {
-
+/* Drift: slow ambient sway for background accents */
+@keyframes drift {
   0%,
-  90%,
   100% {
-    background-position: calc(-100% - var(--shiny-width)) 0;
+    transform: translate(0, 0);
   }
 
-  30%,
-  60% {
-    background-position: calc(100% + var(--shiny-width)) 0;
+  50% {
+    transform: translate(12px, -16px);
   }
 }
 
-/* Utility classes for animations */
-.animate-shimmer-slide {
-  animation: shimmer-slide var(--speed) ease-in-out infinite alternate;
+.animate-rise {
+  animation: rise 0.7s var(--ease-water) both;
 }
 
-.animate-spin-around {
-  animation: spin-around calc(var(--speed) * 2) infinite linear;
+.animate-drift {
+  animation: drift 16s ease-in-out infinite;
 }
 
-.animate-meteor-effect {
-  animation: meteor-effect linear infinite;
+/* Caustic light: soft depth lighting, used sparingly */
+.caustic-light {
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(107, 123, 173, 0.12), transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 110%, rgba(232, 168, 124, 0.05), transparent 55%);
 }
 
-.animate-border-beam {
-  animation: border-beam calc(var(--duration) * 1s) infinite linear;
-}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 
-.animate-shiny-text {
-  animation: shiny-text 8s infinite;
+  .animate-rise,
+  .animate-drift {
+    animation: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
