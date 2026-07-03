@@ -13,9 +13,12 @@
       "Hackathon": ["Champion"]
     },
     "hackathon": { "placement": "Champion" },
-    "links": { "live": "#", "github": "#" },
+    "links": {
+      "live": "https://mate.axonenjin.com/",
+      "github": "https://github.com/Axon-Enjin/mate"
+    },
     "thumbnail": "/project_thumbnails/Mate_thumbnail.png",
-    "icon": "/project_icons/mate.png"
+    "icon": "/project_icons/mate.svg"
   },
   {
     "slug": "archon",
@@ -31,9 +34,73 @@
       "Hackathon": ["Champion"]
     },
     "hackathon": { "placement": "Champion" },
-    "links": { "live": "#", "github": "#" },
+    "links": {
+      "live": "https://archon.axonenjin.com/",
+      "github": "https://github.com/Axon-Enjin/archon"
+    },
     "thumbnail": "/project_thumbnails/Archon_thumbnail.png",
     "icon": "/project_icons/archon.png"
+  },
+  {
+    "slug": "ciel",
+    "title": "Ciel",
+    "tagline": "AI-native Impact Operating System for the social sector",
+    "description": "The missing layer between need identified and solution scaled — turning a plain-language social need into a grounded Theory of Change, funded grant proposals, and a predictive M&E loop so promising pilots reach scale instead of ending when grants expire.",
+    "year": "2026",
+    "categories": ["Web", "Cloud Computing", "AI Engineering"],
+    "techByCategory": {
+      "Web": ["Next.js", "FastAPI"],
+      "Cloud Computing": ["Supabase"],
+      "AI Engineering": ["LangGraph", "Microsoft AI Foundry"]
+    },
+    "hackathon": null,
+    "links": {
+      "live": "https://ciel.axonenjin.com/",
+      "github": "https://github.com/Axon-Enjin/ciel"
+    },
+    "thumbnail": "/project_thumbnails/ciel_thumbnail.png",
+    "icon": "/project_icons/ciel.svg"
+  },
+  {
+    "slug": "axial",
+    "title": "Axial",
+    "tagline": "Instant Capital, Invisible Compliance.",
+    "description": "A Stellar/Soroban-powered liquidity and compliance engine for Philippine MSMEs — tokenize receivables, fund payroll instantly, and automate BIR EIS tax reporting on a single pipeline.",
+    "year": "2026",
+    "categories": ["Web", "Blockchain", "Hackathon"],
+    "techByCategory": {
+      "Web": ["Next.js", "FastAPI"],
+      "Blockchain": ["Stellar", "Soroban"],
+      "Hackathon": ["3rd Place"]
+    },
+    "hackathon": { "placement": "3rd Place" },
+    "links": {
+      "live": "https://axial.axonenjin.com/",
+      "github": "https://github.com/Axon-Enjin/axial"
+    },
+    "thumbnail": "/project_thumbnails/axial_thumbnail.png",
+    "icon": "/project_icons/axial.svg"
+  },
+  {
+    "slug": "aniskwela",
+    "title": "Aniskwela",
+    "tagline": "Your learning grows like a field. Slowly, visibly, and it stays yours.",
+    "description": "Aniskwela (ani harvest + eskwela school) is an AI educational tool built for Filipino farmers. Teachers turn raw documents into structured courses in minutes. Learners study on low-end phones over prepaid 3G. Every completed course can issue a portable, standards-based credential whose tamper-evidence hash is anchored on Stellar.",
+    "year": "2026",
+    "categories": ["Cloud Computing", "AI Engineering", "Blockchain"],
+    "techByCategory": {
+      "Cloud Computing": ["Supabase"],
+      "AI Engineering": ["Microsoft AI Foundry"],
+      "Blockchain": ["Stellar"],
+      "Web": ["Next.js PWA", "TypeScript"]
+    },
+    "hackathon": null,
+    "links": {
+      "live": "https://aniskwela.axonenjin.com/",
+      "github": "https://github.com/Axon-Enjin/aniskwela"
+    },
+    "thumbnail": "/project_thumbnails/aniskwela_thumbnail.png",
+    "icon": "/project_icons/aniskwela.svg"
   },
   {
     "slug": "fetch",

@@ -23,35 +23,45 @@ type Project = {
 
 const allProjects = projects as unknown as Project[];
 
-const CATEGORIES = [
+const CATEGORY_PRIORITY = [
     "Web",
     "Mobile",
     "Cloud Computing",
     "AI Engineering",
+    "Blockchain",
     "Hackathon",
-] as const;
+];
 
 const PER_PAGE = 6;
 
 function ProjectCard({ project }: { project: Project }) {
-    const isChampion = project.hackathon?.placement === "Champion";
+    const placement = project.hackathon?.placement ?? null;
+    const isChampion = placement === "Champion";
     const techs = Array.from(
         new Set(Object.values(project.techByCategory).flat())
-    ).filter((t) => t !== "Champion");
+    ).filter((t) => t !== "Champion" && t !== placement);
 
     return (
         <article
             className={`group relative flex flex-col overflow-hidden rounded-2xl border bg-[var(--ocean-surface)] transition-colors duration-300 ${
                 isChampion
                     ? "border-[var(--glow-amber)]/60 hover:border-[var(--glow-amber)]"
-                    : "border-[var(--ocean-border)] hover:border-[var(--mist-700)]"
+                    : placement
+                        ? "border-[#c9855c]/50 hover:border-[#c9855c]"
+                        : "border-[var(--ocean-border)] hover:border-[var(--mist-700)]"
             }`}
         >
-            {/* Champion banner — deliberately the loudest element */}
-            {isChampion && (
-                <div className="absolute top-4 right-4 z-10 flex items-center gap-1.5 rounded-full bg-[var(--glow-amber)] px-3 py-1.5 text-xs font-bold uppercase tracking-wide text-[var(--ocean-deep)] shadow-lg shadow-[var(--glow-amber)]/25">
+            {/* Placement banner — deliberately the loudest element */}
+            {placement && (
+                <div
+                    className={`absolute top-4 right-4 z-10 flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-bold uppercase tracking-wide text-[var(--ocean-deep)] shadow-lg ${
+                        isChampion
+                            ? "bg-[var(--glow-amber)] shadow-[var(--glow-amber)]/25"
+                            : "bg-[#c9855c] shadow-[#c9855c]/25"
+                    }`}
+                >
                     <Trophy size={13} strokeWidth={2.5} />
-                    Hackathon Champion
+                    {isChampion ? "Hackathon Champion" : `Hackathon ${placement}`}
                 </div>
             )}
 
@@ -139,6 +149,22 @@ export default function ProjectsSection() {
     const [activeTech, setActiveTech] = useState<string | null>(null);
     const [page, setPage] = useState(1);
 
+    const categories = useMemo(() => {
+        const seen = new Set<string>();
+        for (const p of allProjects) {
+            for (const c of p.categories) seen.add(c);
+        }
+
+        return Array.from(seen).sort((a, b) => {
+            const ai = CATEGORY_PRIORITY.indexOf(a);
+            const bi = CATEGORY_PRIORITY.indexOf(b);
+            if (ai === -1 && bi === -1) return a.localeCompare(b);
+            if (ai === -1) return 1;
+            if (bi === -1) return -1;
+            return ai - bi;
+        });
+    }, []);
+
     // Techs available for the drill-down row of the selected category
     const drilldownTechs = useMemo(() => {
         if (!activeCategory) return [];
@@ -210,7 +236,7 @@ export default function ProjectsSection() {
 
                     {/* Category badges */}
                     <div className="flex flex-wrap gap-2" role="group" aria-label="Filter projects by category">
-                        {CATEGORIES.map((cat) => {
+                        {categories.map((cat) => {
                             const active = activeCategory === cat;
                             return (
                                 <button

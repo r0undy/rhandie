@@ -30,7 +30,7 @@ export function ParallaxDrift({
   const y = useTransform(scrollYProgress, [0, 1], [speed, -speed]);
 
   return (
-    <motion.div ref={ref} style={{ y }} className={className}>
+    <motion.div ref={ref} style={{ y }} className={`relative ${className ?? ""}`}>
       {children}
     </motion.div>
   );
